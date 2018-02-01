@@ -1,0 +1,19 @@
+theme: "tmtms"
+title: "reveal-ck-rabbit-plugin"
+revealjs_config:
+  controls: true
+  postgress: true
+  slideNumber: true
+  history: true
+  overview: true
+  enter: true
+  touch: false
+  loop: false
+  rtl: false
+  fragments: true
+  autoSlide: 0
+  autoSlideStoppable: false
+  mouseWheel: false
+  transition: 'default'
+  transitionSpeed: 'fast'
+  alloted_time: 30
