@@ -1,35 +1,35 @@
-# Reveal::Ck::Rabbit::Plugin
+# reveal-ck-rabbit-plugin
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/reveal/ck/rabbit/plugin`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+[reveal-ck](http://jedcn.github.io/reveal-ck/)のスライドに、[rabbit](https://rabbit-shocker.org/)のようなウサギとカメを表示します。
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'reveal-ck-rabbit-plugin'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install reveal-ck-rabbit-plugin
+    % gem install reveal-ck-rabbit-plugin
 
 ## Usage
 
-TODO: Write usage instructions here
+    % mkdir foo
+    % cd foo
+    % touch slides.md
+    % reveal-ck-rabbit-plugin
+    % reveal-ck generate
 
-## Development
+スライドを開始して2ページ目に進むとウサギが表示されます。
+ウサギは現在のスライドの位置を示しています。
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+config.yml の `revealjs_config` に `alloted_time` を追加するとカメが表示されるようになります。
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```yaml
+title: "Slide title"
+revealjs_config:
+  alloted_time: 300
+```
 
-## Contributing
+スライドの2ページ目を表示した時から `alloted_time`秒かけて右端に進んでいきます。
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/reveal-ck-rabbit-plugin.
+ウサギよりもカメが先行するようなら時間内にスライドの最後までたどり着けない可能性があります。
+
+reveal-ck はファイルが更新されると自動的にスライドがリロードされますが、カメの位置はリロード前と変わりません。
+カメを最初の位置にリセットしたい場合は、スライドの1ページ目でリロードしてください。
+
+Linux上のFirefoxでしか動作確認はしていません。

@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+require 'fileutils'
+
+unless File.exist? 'slides.md'
+  $stderr.puts "can not find slides.md"
+  exit 1
+end
+
+['images/rabbit', 'plugin/rabbit'].each do |dir|
+  FileUtils.mkdir_p dir
+end
+FileUtils.cp(File.expand_path('../images/rabbit.png', __dir__), 'images/rabbit')
+FileUtils.cp(File.expand_path('../images/turtle.png', __dir__), 'images/rabbit')
+FileUtils.cp(File.expand_path('../plugin/rabbit.js', __dir__), 'plugin/rabbit')
