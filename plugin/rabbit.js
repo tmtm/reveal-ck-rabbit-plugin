@@ -2,13 +2,27 @@
     var start_time = null;
 
     var img_rabbit = document.createElement('img');
-    img_rabbit.setAttribute('src', 'images/rabbit/rabbit.png');
-    img_rabbit.setAttribute('style', 'position:fixed; bottom:0px; left: 0px; height:15%; visibility:hidden');
+    img_rabbit.setAttribute('id', 'rabbit-rabbit');
+    img_rabbit.setAttribute('style', 'position:fixed; bottom:0px; left: 0px; visibility:hidden');
+
     var img_turtle = document.createElement('img');
-    img_turtle.setAttribute('src', 'images/rabbit/turtle.png');
-    img_turtle.setAttribute('style', 'position:fixed; bottom:0px; left: 0px; height:15%; visibility:hidden');
+    img_turtle.setAttribute('id', 'rabbit-turtle');
+    img_turtle.setAttribute('style', 'position:fixed; bottom:0px; left: 0px; visibility:hidden');
+
     document.body.appendChild(img_turtle);
     document.body.appendChild(img_rabbit);
+
+    // CSS background-image の URL を src に設定して background-image を削除
+    var set_image_src = function(img) {
+        var bg_image_url = window.getComputedStyle(img).backgroundImage.match(/^url\(\"([^\"]*)\"\)/);
+        if (bg_image_url) {
+            img.src = bg_image_url[1];
+            img.style.backgroundImage = 'none';
+        }
+    }
+
+    set_image_src(img_rabbit);
+    set_image_src(img_turtle);
 
     setInterval(function(){
         if (start_time) {
@@ -27,7 +41,7 @@
         }
     }, 500);
 
-    var rabbit = function(current_page) {
+    var display_rabbit = function(current_page) {
         if (!start_time) {
             var re = /rabbit_start_time=(\d+)/;
             if (current_page > 0 && document.cookie.match(re)) {
@@ -48,8 +62,7 @@
             document.cookie = 'rabbit_start_time=';
         }
     } else {
-        setTimeout(function(){rabbit(current_page)}, 0);
+        setTimeout(function(){display_rabbit(current_page)}, 0);
     }
-    Reveal.addEventListener('slidechanged', function(event){rabbit(event.indexh)});
+    Reveal.addEventListener('slidechanged', function(event){display_rabbit(event.indexh)});
 }());
-
