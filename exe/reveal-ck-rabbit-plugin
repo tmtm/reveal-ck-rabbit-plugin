@@ -6,9 +6,10 @@ unless File.exist? 'slides.md'
   exit 1
 end
 
-['images/rabbit', 'plugin/rabbit'].each do |dir|
+['images/rabbit', 'plugin/rabbit', 'css'].each do |dir|
   FileUtils.mkdir_p dir
 end
 FileUtils.cp(File.expand_path('../images/rabbit.png', __dir__), 'images/rabbit')
 FileUtils.cp(File.expand_path('../images/turtle.png', __dir__), 'images/rabbit')
 FileUtils.cp(File.expand_path('../plugin/rabbit.js', __dir__), 'plugin/rabbit')
+FileUtils.cp(File.expand_path('../css/rabbit.css', __dir__), 'css')
