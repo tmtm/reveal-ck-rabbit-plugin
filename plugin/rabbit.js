@@ -3,10 +3,10 @@
 
     var img_rabbit = document.createElement('img');
     img_rabbit.setAttribute('src', 'images/rabbit/rabbit.png');
-    img_rabbit.setAttribute('style', 'position:fixed; bottom:0px; left: 0px; height:15%; display:none');
+    img_rabbit.setAttribute('style', 'position:fixed; bottom:0px; left: 0px; height:15%; visibility:hidden');
     var img_turtle = document.createElement('img');
     img_turtle.setAttribute('src', 'images/rabbit/turtle.png');
-    img_turtle.setAttribute('style', 'position:fixed; bottom:0px; left: 0px; height:15%; display:none');
+    img_turtle.setAttribute('style', 'position:fixed; bottom:0px; left: 0px; height:15%; visibility:hidden');
     document.body.appendChild(img_turtle);
     document.body.appendChild(img_rabbit);
 
@@ -14,10 +14,15 @@
         if (start_time) {
             var alloted_time = Reveal.getConfig().alloted_time;
             if (alloted_time) {
-                img_turtle.style.display = '';
-                img_turtle.style.left = (window.innerWidth - img_turtle.width) * ((Date.now()-start_time) / 1000 / alloted_time) + "px";
+                var left = (window.innerWidth - img_turtle.width) * ((Date.now()-start_time) / 1000 / alloted_time) * 100 / window.innerWidth;
+                if (left > 100) {
+                    img_turtle.style.visibility = 'hidden';
+                } else {
+                    img_turtle.style.visibility = 'visible';
+                    img_turtle.style.left = left + '%';
+                }
             } else {
-                img_turtle.style.display = 'none';
+                img_turtle.style.visibility = 'visible';
             }
         }
     }, 500);
@@ -33,8 +38,9 @@
             }
         }
         var total_page = Reveal.getTotalSlides();
-        img_rabbit.style.display = '';
-        img_rabbit.style.left = (window.innerWidth - img_rabbit.width) * (current_page / (total_page - 1)) + "px";
+        var left = (window.innerWidth - img_rabbit.width) * (current_page / (total_page - 1)) * 100 / window.innerWidth;
+        img_rabbit.style.visibility = 'visible';
+        img_rabbit.style.left = left + '%';
     }
     var current_page = Reveal.getIndices().h
     if (current_page == 0) {
